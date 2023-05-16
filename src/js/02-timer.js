@@ -36,9 +36,7 @@ function onBtnStartClick() {
   if (numberOfClick > 1) {
     return;
   }
-  if (selectedDate === null) {
-    console.log('dfhfgh');
-  }
+
   refs.input.setAttribute('disabled', 'disabled');
 
   Notiflix.Notify.success('Timer started');
