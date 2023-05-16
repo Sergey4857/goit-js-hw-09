@@ -43,6 +43,5 @@ function onFormSubmit(event) {
         );
       });
   }
-
   form.reset();
 }
