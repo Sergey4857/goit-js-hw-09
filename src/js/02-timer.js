@@ -32,11 +32,6 @@ const options = {
 flatpickr('input#datetime-picker', options);
 
 function onBtnStartClick() {
-  numberOfClick += 1;
-  if (numberOfClick > 1) {
-    return;
-  }
-
   refs.input.setAttribute('disabled', 'disabled');
 
   Notiflix.Notify.success('Timer started');
@@ -48,6 +43,10 @@ function onBtnStartClick() {
     refs.hour.textContent = addLeadingZero(convertedTime.hours);
     refs.minute.textContent = addLeadingZero(convertedTime.minutes);
     refs.second.textContent = addLeadingZero(convertedTime.seconds);
+
+    madeDisabledButtonTimerRunning(intervalId);
+
+    madeOnlyPositiveValue(intervalId);
   }, 1000);
 }
 
@@ -79,4 +78,21 @@ function testCorrectDate() {
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
+}
+
+function madeDisabledButtonTimerRunning(intervalId) {
+  if (intervalId) {
+    refs.button.setAttribute('disabled', 'disabled');
+  }
+}
+function madeOnlyPositiveValue(intervalId) {
+  if (
+    refs.second.textContent < 1 &&
+    refs.minute.textContent < 1 &&
+    refs.hour.textContent < 1 &&
+    refs.day.textContent < 1
+  ) {
+    clearInterval(intervalId);
+    refs.input.removeAttribute('disabled', 'disabled');
+  }
 }
